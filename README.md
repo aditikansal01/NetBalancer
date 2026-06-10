@@ -1,51 +1,85 @@
-## Hacktoberfest 2024 ![Hacktoberfest](https://img.shields.io/badge/Hacktoberfest-2024-blueviolet?style=for-the-badge)
+# NetBalancer – Layer 4 Traffic Load Balancer
 
-Ccontributions from all levels of experience are welcome! To contribute:
+NetBalancer is a distributed systems project that implements a **Layer-4 load balancing architecture** for routing TCP traffic across multiple backend servers. The system focuses on **high availability, scalability, and fault tolerance** using dynamic server selection strategies and health monitoring.
 
-- Fork the repository
-- Make your changes
-- Open a pull request (PR)
+---
 
-Be sure to read the contribution guidelines and code of conduct before submitting your PR.
+## 🚀 Key Features
 
-# Simple Go Load Balancer
+* Layer-4 TCP traffic routing across multiple backend servers
+* Round Robin load balancing algorithm
+* Backend server pool management
+* Health check system for server availability
+* Dockerized multi-service deployment
+* Modular architecture for extensibility
 
-This project demonstrates a basic load balancer implemented in Go. It only uses the standard http library.
+---
 
-It uses Docker and Docker Compose to spin up multiple backend HTTP servers and a load balancer that distributes incoming requests among these backends in round-robin fashion.
+## 🧠 System Architecture
 
-## Features
+Client requests are routed through the Load Balancer, which dynamically selects an available backend server from the pool based on the configured scheduling strategy. Health checks ensure that only active servers receive traffic.
 
-- **Round-Robin Load Balancing**: Distributes incoming requests evenly across backend servers.
-- **Health Check**: Detects and excludes unhealthy backend servers from the pool.
-- **Retry Mechanism**: Retries failed requests with different backend servers.
-- **Dockerized**: Easy to deploy and manage using Docker and Docker Compose.
+```
+Client → Load Balancer → Server Pool → Backend Server → Response
+```
 
-## Getting Started
+---
 
-### Prerequisites
+## 🛠️ Tech Stack
 
-- [Docker](https://www.docker.com/)
-- [Docker Compose](https://docs.docker.com/compose/)
-- [Go](https://golang.org/) (if you want to run the code locally)
+* Go
+* TCP/IP Networking
+* Docker & Docker Compose
+* Distributed Systems Concepts
+* Load Balancing Algorithms
 
-### Running the Load Balancer
+---
 
-1. **Build and start the containers:**
+## 📊 Load Balancing Strategy
 
-   ```bash
-   docker compose up --build
-   ```
+Currently implemented:
 
-2. **Test the Load Balancer:**
+* Round Robin scheduling
 
-   ```bash
-   curl http://localhost:8080
-   ```
+Planned enhancements:
 
-   You should see responses from different backend servers (e.g. Hello from backend running on port 80)
+* Least Connections algorithm
+* Weighted load balancing
+* Dynamic health-based routing
 
-3. **Configuring health check**
-   Set enviornment variable: `export HEALTH_CHECK_INTERVAL=60` (macOS/Linux), `set HEALTH_CHECK_INTERVAL=60` (Windows Command Prompt)
+---
 
-Inspired by [build-your-own-x](https://github.com/codecrafters-io/build-your-own-x) repo
+## 🔍 Future Improvements
+
+* Request logging and observability dashboard
+* Metrics endpoint for traffic monitoring
+* Retry and failover mechanisms
+* Latency-based routing optimization
+* Kubernetes deployment support
+
+---
+
+## 📌 Purpose
+
+This project was built to strengthen understanding of:
+
+* Computer Networks (TCP/IP)
+* Distributed system design
+* Concurrency and server-side architecture
+* Real-world traffic routing mechanisms used in scalable systems
+
+---
+
+## 📁 Project Structure
+
+* `main.go` – Entry point for load balancer
+* `serverpool/` – Backend server management
+* `health/` – Health check implementation
+* `http-server/` – Backend service simulation
+* `docker-compose.yml` – Multi-service orchestration
+
+---
+
+## ⚠️ Note
+
+This project is actively being extended to include advanced load balancing strategies and system observability features.
