@@ -1,0 +1,42 @@
+version: "3.8"
+
+services:
+  loadbalancer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./config.yaml:/app/config.yaml  # Mount the YAML config file into the container
+    depends_on:
+      - server1
+      - server2
+      - server3
+
+  server1:
+    build:
+      context: ./http-server
+      dockerfile: Dockerfile
+    ports:
+      - "8081:80"
+    environment:
+      PORT: 80
+
+  server2:
+    build:
+      context: ./http-server
+      dockerfile: Dockerfile
+    ports:
+      - "8082:80"
+    environment:
+      PORT: 80
+
+  server3:
+    build:
+      context: ./http-server
+      dockerfile: Dockerfile
+    ports:
+      - "8083:80"
+    environment:
+      PORT: 80
